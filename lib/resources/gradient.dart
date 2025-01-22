@@ -12,4 +12,13 @@ abstract class AppGradient {
           Colors.orange[300]!,
         ],
       );
+
+  static LinearGradient blackGradient(BuildContext context) => LinearGradient(
+        colors: [
+          Colors.transparent,
+          Theme.of(context).colorScheme.primary.withOpacity(0.1),
+        ],
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+      );
 }

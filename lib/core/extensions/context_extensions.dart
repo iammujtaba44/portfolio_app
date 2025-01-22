@@ -30,4 +30,9 @@ extension TextThemeExtension on BuildContext {
       MediaQuery.of(this).size.width >= 768 && MediaQuery.of(this).size.width < 1024;
 
   bool get isMobile => MediaQuery.of(this).size.width < 768;
+
+  bool get isDarkMode => Theme.of(this).brightness == Brightness.dark;
+
+  // Colors
+  Color get primaryTextColor => isDarkMode ? Colors.white : Colors.black;
 }

@@ -1,8 +1,10 @@
 // ignore_for_file: constant_identifier_names
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio_app/core/extensions/context_extensions.dart';
 import 'package:portfolio_app/core/widgets/widgets.dart';
+import 'package:portfolio_app/resources/resources.dart';
 
 enum AppBarPage {
   Home,
@@ -49,8 +51,20 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
                     RichText(
                       text: TextSpan(
                         children: [
-                          TextSpan(text: "Mujtaba", style: context.displaySmall),
-                          TextSpan(text: '.com', style: context.bodyLarge),
+                          TextSpan(
+                              text: "Mujtaba",
+                              style: GoogleFonts.pacifico(
+                                fontSize: 24,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.white,
+                              )),
+                          TextSpan(
+                              text: '.com',
+                              style: GoogleFonts.pacifico(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w400,
+                                color: Colors.white,
+                              )),
                         ],
                       ),
                     ),
@@ -77,9 +91,11 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: isSelected ? Colors.white : Colors.transparent,
-          width: 1,
+        border: Border(
+          bottom: BorderSide(
+            color: isSelected ? Colors.orange[200]! : Colors.transparent,
+            width: 1,
+          ),
         ),
       ),
       child: TextButton(

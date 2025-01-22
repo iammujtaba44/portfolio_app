@@ -9,33 +9,27 @@ class AboutPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('About Me'),
-      ),
-      body: ResponsiveWrapper(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              const AboutHeader(),
-              const SizedBox(height: 32),
-              Text(
-                'Experience',
-                style: Theme.of(context).textTheme.headlineMedium,
-              ),
-              const SizedBox(height: 16),
-              const ExperienceTimeline(),
-              const SizedBox(height: 32),
-              Text(
-                'Education',
-                style: Theme.of(context).textTheme.headlineMedium,
-              ),
-              const SizedBox(height: 16),
-              const EducationSection(),
-            ],
-          ),
+    return ListView(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      primary: false,
+      children: [
+        const AboutHeader(),
+        const SizedBox(height: 32),
+        Text(
+          'Experience',
+          style: Theme.of(context).textTheme.headlineMedium,
         ),
-      ),
+        const SizedBox(height: 16),
+        const ExperienceTimeline(),
+        const SizedBox(height: 32),
+        Text(
+          'Education',
+          style: Theme.of(context).textTheme.headlineMedium,
+        ),
+        const SizedBox(height: 16),
+        const EducationSection(),
+      ],
     );
   }
 }

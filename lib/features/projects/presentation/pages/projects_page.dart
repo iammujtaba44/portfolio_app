@@ -1,96 +1,121 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio_app/core/extensions/context_extensions.dart';
+import 'package:portfolio_app/features/projects/domain/models/projects_model.dart';
+import 'package:portfolio_app/features/projects/domain/project_enum.dart';
+import 'package:portfolio_app/features/projects/presentation/providers/projects_provider.dart';
+import 'package:portfolio_app/features/projects/presentation/widgets/project_card.dart';
+import 'package:provider/provider.dart';
 
-class ProjectsPage extends StatelessWidget {
+class ProjectsPage extends StatefulWidget {
   const ProjectsPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Projects'),
-      ),
-      body: Center(
-        child: ListView(
-          padding: const EdgeInsets.all(16.0),
-          children: [
-            ProjectCard(
-              title: 'Project 1',
-              description: 'Description of project 1',
-              technologies: ['Flutter', 'Dart', 'Firebase'],
-              imageUrl: 'assets/images/project1.png', // Add your image
-              projectUrl: 'https://github.com/yourusername/project1',
-            ),
-            const SizedBox(height: 16),
-            ProjectCard(
-              title: 'Project 2',
-              description: 'Description of project 2',
-              technologies: ['React', 'Node.js', 'MongoDB'],
-              imageUrl: 'assets/images/project2.png', // Add your image
-              projectUrl: 'https://github.com/yourusername/project2',
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+  State<ProjectsPage> createState() => _ProjectsPageState();
 }
 
-class ProjectCard extends StatelessWidget {
-  final String title;
-  final String description;
-  final List<String> technologies;
-  final String imageUrl;
-  final String projectUrl;
-
-  const ProjectCard({
-    super.key,
-    required this.title,
-    required this.description,
-    required this.technologies,
-    required this.imageUrl,
-    required this.projectUrl,
-  });
+class _ProjectsPageState extends State<ProjectsPage> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<ProjectsProvider>().fetchProjects();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 4,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Image.asset(
-            imageUrl,
-            height: 200,
-            width: double.infinity,
-            fit: BoxFit.cover,
+    final projects = context.watch<ProjectsProvider>().projects;
+    return Container(
+      color: Theme.of(context).colorScheme.surface,
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: context.isDesktop ? 120 : 24,
+            vertical: 24,
           ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: Theme.of(context).textTheme.headlineSmall,
-                ),
-                const SizedBox(height: 8),
-                Text(description),
-                const SizedBox(height: 8),
-                Wrap(
-                  spacing: 8,
-                  children: technologies.map((tech) => Chip(label: Text(tech))).toList(),
-                ),
-                const SizedBox(height: 8),
-                ElevatedButton(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Wrap(
+                spacing: 16,
+                runSpacing: 16,
+                children: [
+                  ...projects.map((project) => ProjectCard(
+                        title: project.title,
+                        category: 'Product',
+                        imageUrl: project.imageUrl,
+                        links: project.links,
+                        hasGlow: true,
+                      )),
+                  // ProjectCard(
+                  //   title: 'The Holy Qur\'an',
+                  //   category: 'Open Source',
+                  //   imageUrl: 'assets/images/quran_app.png',
+                  //   links: [
+                  //     ProjectLink(type: LinkType.play),
+                  //     ProjectLink(type: LinkType.web),
+                  //     ProjectLink(type: LinkType.github),
+                  //   ],
+                  // ),
+                  // ProjectCard(
+                  //   title: 'Devfolio',
+                  //   category: 'Open Source',
+                  //   imageUrl: 'assets/images/devfolio.png',
+                  //   links: [
+                  //     ProjectLink(type: LinkType.play),
+                  //     ProjectLink(type: LinkType.web),
+                  //     ProjectLink(type: LinkType.github),
+                  //     ProjectLink(type: LinkType.app),
+                  //   ],
+                  // ),
+                ],
+              ),
+              // GridView.count(
+              //   shrinkWrap: true,
+              //   physics: const NeverScrollableScrollPhysics(),
+              //   crossAxisCount: 3,
+              //   mainAxisSpacing: 16,
+              //   crossAxisSpacing: 16,
+              //   childAspectRatio: 1.2,
+              //   children: const [
+              //     ProjectCard(
+              //       title: 'The Holy Qur\'an',
+              //       category: 'Open Source',
+              //       imageUrl: 'assets/images/quran_app.png',
+              //       links: [
+              //         ProjectLink(type: LinkType.play),
+              //         ProjectLink(type: LinkType.web),
+              //         ProjectLink(type: LinkType.github),
+              //       ],
+              //     ),
+              //     ProjectCard(
+              //       title: 'Devfolio',
+              //       category: 'Open Source',
+              //       imageUrl: 'assets/images/devfolio.png',
+              //       links: [
+              //         ProjectLink(type: LinkType.play),
+              //         ProjectLink(type: LinkType.web),
+              //         ProjectLink(type: LinkType.github),
+              //         ProjectLink(type: LinkType.app),
+              //       ],
+              //     ),
+              //     // Add more projects...
+              //   ],
+              // ),
+
+              const SizedBox(height: 24),
+              Center(
+                child: TextButton(
                   onPressed: () {
-                    // Add URL launcher functionality
+                    // Handle See More action
                   },
-                  child: const Text('View Project'),
+                  child: const Text(
+                    'See More',
+                    style: TextStyle(color: Colors.green),
+                  ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
