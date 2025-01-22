@@ -8,6 +8,8 @@ import 'package:portfolio_app/features/projects/presentation/providers/projects_
 import 'package:portfolio_app/features/projects/presentation/widgets/project_card.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../core/utils/launch_url.dart';
+
 class ProjectsPage extends StatefulWidget {
   const ProjectsPage({super.key});
 
@@ -43,7 +45,8 @@ class _ProjectsPageState extends State<ProjectsPage> {
               const _ProjectsView(),
               Center(
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () =>
+                      Launcher.launch('https://github.com/iammujtaba44?tab=repositories'),
                   child: Text(
                     'See More',
                     style: GoogleFonts.poppins(

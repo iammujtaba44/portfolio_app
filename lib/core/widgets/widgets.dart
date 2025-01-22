@@ -4,6 +4,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:portfolio_app/core/extensions/context_extensions.dart';
+import 'package:portfolio_app/core/utils/launch_url.dart';
 import 'package:portfolio_app/resources/resources.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio_app/features/home/presentation/providers/home_provider.dart';

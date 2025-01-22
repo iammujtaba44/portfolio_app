@@ -12,7 +12,7 @@ class SocialLinksWidget extends StatelessWidget {
       children: [
         ...socialAccounts.map(
           (e) => SocialButton(
-            onPressed: () {},
+            onPressed: () => Launcher.launch(e.url),
             image: e.image,
           ),
         ),
