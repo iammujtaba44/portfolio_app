@@ -53,11 +53,14 @@ class ContactPageCalendarCardView extends StatelessWidget {
           ),
           const SizedBox(height: 24),
           ElevatedButton.icon(
-            onPressed: () =>
-                Launcher.launchCalendar('https://calendly.com/i-mmujtaba96/let-s-talk-tech'),
-            icon: const Icon(Icons.videocam_outlined),
+            onPressed: () => Launcher.launchCalendar('https://calendly.com/i-mmujtaba96/meet'),
+            icon: Icon(
+              Icons.videocam_outlined,
+              color: context.reversePrimaryTextColor,
+              size: 20,
+            ),
             label: Text(
-              'Book a 45 mins session',
+              'Book a 30 mins session',
               style: GoogleFonts.poppins(
                 fontSize: 14,
                 fontWeight: FontWeight.w500,
