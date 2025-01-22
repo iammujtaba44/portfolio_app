@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio_app/core/extensions/context_extensions.dart';
+import 'package:portfolio_app/core/widgets/widgets.dart';
 import 'package:portfolio_app/features/projects/domain/models/projects_model.dart';
 import 'package:portfolio_app/features/projects/domain/project_enum.dart';
 import 'package:portfolio_app/features/projects/presentation/providers/projects_provider.dart';
@@ -22,9 +24,8 @@ class _ProjectsPageState extends State<ProjectsPage> {
 
   @override
   Widget build(BuildContext context) {
-    final projects = context.watch<ProjectsProvider>().projects;
     return Container(
-      color: Theme.of(context).colorScheme.surface,
+      color: context.surfaceColor,
       child: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(
@@ -34,88 +35,46 @@ class _ProjectsPageState extends State<ProjectsPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Wrap(
-                spacing: 16,
-                runSpacing: 16,
-                children: [
-                  ...projects.map((project) => ProjectCard(
-                        title: project.title,
-                        category: 'Product',
-                        imageUrl: project.imageUrl,
-                        links: project.links,
-                        hasGlow: true,
-                      )),
-                  // ProjectCard(
-                  //   title: 'The Holy Qur\'an',
-                  //   category: 'Open Source',
-                  //   imageUrl: 'assets/images/quran_app.png',
-                  //   links: [
-                  //     ProjectLink(type: LinkType.play),
-                  //     ProjectLink(type: LinkType.web),
-                  //     ProjectLink(type: LinkType.github),
-                  //   ],
-                  // ),
-                  // ProjectCard(
-                  //   title: 'Devfolio',
-                  //   category: 'Open Source',
-                  //   imageUrl: 'assets/images/devfolio.png',
-                  //   links: [
-                  //     ProjectLink(type: LinkType.play),
-                  //     ProjectLink(type: LinkType.web),
-                  //     ProjectLink(type: LinkType.github),
-                  //     ProjectLink(type: LinkType.app),
-                  //   ],
-                  // ),
-                ],
+              const PageHeaderTextWidget(
+                title: 'Projects',
+                description:
+                    'Here are some of the projects I have worked on, I have worked on a lot of projects but these are the ones I am proud of.',
               ),
-              // GridView.count(
-              //   shrinkWrap: true,
-              //   physics: const NeverScrollableScrollPhysics(),
-              //   crossAxisCount: 3,
-              //   mainAxisSpacing: 16,
-              //   crossAxisSpacing: 16,
-              //   childAspectRatio: 1.2,
-              //   children: const [
-              //     ProjectCard(
-              //       title: 'The Holy Qur\'an',
-              //       category: 'Open Source',
-              //       imageUrl: 'assets/images/quran_app.png',
-              //       links: [
-              //         ProjectLink(type: LinkType.play),
-              //         ProjectLink(type: LinkType.web),
-              //         ProjectLink(type: LinkType.github),
-              //       ],
-              //     ),
-              //     ProjectCard(
-              //       title: 'Devfolio',
-              //       category: 'Open Source',
-              //       imageUrl: 'assets/images/devfolio.png',
-              //       links: [
-              //         ProjectLink(type: LinkType.play),
-              //         ProjectLink(type: LinkType.web),
-              //         ProjectLink(type: LinkType.github),
-              //         ProjectLink(type: LinkType.app),
-              //       ],
-              //     ),
-              //     // Add more projects...
-              //   ],
-              // ),
-
-              const SizedBox(height: 24),
+              const _ProjectsView(),
               Center(
                 child: TextButton(
-                  onPressed: () {
-                    // Handle See More action
-                  },
-                  child: const Text(
+                  onPressed: () {},
+                  child: Text(
                     'See More',
-                    style: TextStyle(color: Colors.green),
+                    style: GoogleFonts.poppins(
+                      color: context.primaryColor,
+                      fontWeight: FontWeight.w500,
+                      decoration: TextDecoration.underline,
+                    ),
                   ),
                 ),
               ),
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class _ProjectsView extends StatelessWidget {
+  const _ProjectsView();
+
+  @override
+  Widget build(BuildContext context) {
+    final projects = context.watch<ProjectsProvider>().projects;
+
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 40),
+      child: Wrap(
+        spacing: 16,
+        runSpacing: 16,
+        children: projects.map((project) => ProjectCard(project: project)).toList(growable: false),
       ),
     );
   }

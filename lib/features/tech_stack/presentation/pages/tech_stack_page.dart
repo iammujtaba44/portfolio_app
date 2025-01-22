@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio_app/core/extensions/context_extensions.dart';
+import 'package:portfolio_app/core/widgets/widgets.dart';
 import 'package:portfolio_app/features/tech_stack/presentation/providers/tech_stack_provider.dart';
 import 'package:portfolio_app/features/tech_stack/presentation/widgets/tech_stack_categories_list_widget.dart';
 import 'package:portfolio_app/features/tech_stack/presentation/widgets/tech_stack_category_widget.dart';
@@ -30,7 +31,7 @@ class _TechState extends State<TechStackPage> {
           return const Center(child: CircularProgressIndicator());
         }
         return Container(
-          color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+          color: context.primaryColorWithOpacity1,
           child: ListView(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
@@ -40,26 +41,11 @@ class _TechState extends State<TechStackPage> {
               vertical: 24,
             ),
             children: [
-              Text(
-                'Tech Stack',
-                style: GoogleFonts.poppins(
-                  color: Theme.of(context).colorScheme.primary,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
-                ),
+              const PageHeaderTextWidget(
+                title: 'Tech Stack',
+                description:
+                    'Here are some of the technologies I have worked with, I have worked with a lot of technologies but these are the ones I am proud of.',
               ),
-              const SizedBox(height: 16),
-              SizedBox(
-                child: Text(
-                  'Change is inevitable, so I keep on exploring new technology,\nlearn it in a minimal possible way and then build something\nout of it to see how well I did :)',
-                  style: GoogleFonts.poppins(
-                    color: Colors.grey[400],
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 32),
               _buildMainWidget(techStackProvider),
             ],
           ),

@@ -35,4 +35,12 @@ extension TextThemeExtension on BuildContext {
 
   // Colors
   Color get primaryTextColor => isDarkMode ? Colors.white : Colors.black;
+  Color get reversePrimaryTextColor => isDarkMode ? Colors.black : Colors.white;
+  Color get secondaryTextColor => isDarkMode ? Colors.white24 : Colors.black54;
+  Color get primaryColor => Theme.of(this).colorScheme.primary;
+  Color get primaryColorOnSurface => Theme.of(this).colorScheme.onPrimary;
+  Color get secondaryColor => Theme.of(this).colorScheme.secondary;
+  Color get primaryColorWithOpacity1 => Theme.of(this).colorScheme.primary.withOpacity(0.1);
+  Color get descriptionColor => isDarkMode ? Colors.grey[400]! : Colors.grey[600]!;
+  Color get surfaceColor => Theme.of(this).colorScheme.surface;
 }

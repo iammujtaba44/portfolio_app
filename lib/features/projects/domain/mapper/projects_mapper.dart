@@ -28,6 +28,7 @@ class ProjectsMapper {
         links: toLinkList(project),
         title: project['title'] as String? ?? '',
         description: project['description'] as String? ?? '',
+        category: project['category'] as String? ?? '',
       );
     } catch (e) {
       log('Error mapping single project: $e');
