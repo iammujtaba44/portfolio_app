@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio_app/core/extensions/context_extensions.dart';
 import 'package:portfolio_app/core/widgets/widgets.dart';
 import 'package:portfolio_app/features/tech_stack/presentation/providers/tech_stack_provider.dart';
+import 'package:portfolio_app/features/tech_stack/presentation/widgets/loading/tech_stack_loading_view.dart';
 import 'package:portfolio_app/features/tech_stack/presentation/widgets/tech_stack_categories_list_widget.dart';
-import 'package:portfolio_app/features/tech_stack/presentation/widgets/tech_stack_category_widget.dart';
 import 'package:provider/provider.dart';
-import '../../../../core/widgets/responsive_wrapper.dart';
-import '../../domain/models/tech_stack_model.dart';
 
 class TechStackPage extends StatefulWidget {
   const TechStackPage({super.key});
@@ -20,7 +17,9 @@ class _TechState extends State<TechStackPage> {
   @override
   void initState() {
     super.initState();
-    context.read<TechStackProvider>().fetchTechStacks();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      context.read<TechStackProvider>().fetchTechStacks();
+    });
   }
 
   @override
@@ -28,7 +27,7 @@ class _TechState extends State<TechStackPage> {
     return Consumer<TechStackProvider>(
       builder: (context, techStackProvider, child) {
         if (techStackProvider.state.isLoading) {
-          return const Center(child: CircularProgressIndicator());
+          return const TechStackLoadingView();
         }
         return Container(
           color: context.primaryColorWithOpacity1,

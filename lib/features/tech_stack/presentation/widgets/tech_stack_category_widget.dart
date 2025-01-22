@@ -25,7 +25,10 @@ class TechStackCategoryWidget extends StatelessWidget {
           spacing: 8,
           runSpacing: 8,
           children: model.stacks
-              .map((techStack) => AppChipWidget(label: techStack.name, icon: techStack.iconPath))
+              .map((techStack) => AppChipWidget(
+                    label: techStack.name,
+                    icon: 'assets/${techStack.iconPath}',
+                  ))
               .toList(),
         ),
       ],
