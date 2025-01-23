@@ -7,8 +7,8 @@ class SocialLinksWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final socialAccounts = context.watch<HomeProvider>().socialAccounts;
     return Wrap(
-      spacing: 16,
-      runSpacing: 16,
+      spacing: context.isDesktop ? 16 : 8,
+      runSpacing: context.isDesktop ? 16 : 8,
       children: [
         ...socialAccounts.map(
           (e) => SocialButton(

@@ -31,8 +31,20 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
           ? RichText(
               text: TextSpan(
                 children: [
-                  TextSpan(text: "Mujtaba", style: context.displaySmall),
-                  TextSpan(text: '.com', style: context.bodyLarge),
+                  TextSpan(
+                      text: "Mujtaba",
+                      style: GoogleFonts.pacifico(
+                        fontSize: 24,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white,
+                      )),
+                  TextSpan(
+                      text: '.dev',
+                      style: GoogleFonts.pacifico(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.white,
+                      )),
                 ],
               ),
             )
@@ -40,6 +52,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
       actions: [
         if (context.isDesktop) const SizedBox(width: 20),
       ],
+      automaticallyImplyLeading: false,
       bottom: PreferredSize(
         preferredSize: const Size.fromHeight(kToolbarHeight),
         child: context.isDesktop
@@ -59,7 +72,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
                                 color: Colors.white,
                               )),
                           TextSpan(
-                              text: '.com',
+                              text: '.dev',
                               style: GoogleFonts.pacifico(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w400,

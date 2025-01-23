@@ -28,8 +28,12 @@ class SocialButton extends StatelessWidget {
         backgroundColor: backgroundColor,
         foregroundColor: foregroundColor,
         padding: EdgeInsets.symmetric(
-          horizontal: label != null ? 24 : 16,
-          vertical: 16,
+          horizontal: label != null
+              ? 24
+              : context.isDesktop
+                  ? 16
+                  : 10,
+          vertical: context.isDesktop ? 16 : 10,
         ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
@@ -48,13 +52,13 @@ class SocialButton extends StatelessWidget {
             Text(label ?? ''),
           ],
           if (icon != null) ...[
-            Icon(icon, size: 20, color: foregroundColor),
+            Icon(icon, size: context.isDesktop ? 20 : 16, color: foregroundColor),
           ],
           if (image != null) ...[
             Image.asset(
               image ?? '',
-              width: 20,
-              height: 20,
+              width: context.isDesktop ? 20 : 16,
+              height: context.isDesktop ? 20 : 16,
               color: foregroundColor,
             ),
           ],

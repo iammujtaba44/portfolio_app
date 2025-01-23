@@ -60,9 +60,11 @@ class CommonFooterView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text('Design & Developed by ',
-              style: GoogleFonts.poppins(fontSize: 18, color: context.descriptionColor)),
+              style: GoogleFonts.poppins(
+                  fontSize: context.isDesktop ? 18 : 12, color: context.descriptionColor)),
           Text('Muhammad Mujtaba',
-              style: GoogleFonts.poppins(fontSize: 18, color: context.primaryColor)),
+              style: GoogleFonts.poppins(
+                  fontSize: context.isDesktop ? 18 : 12, color: context.primaryColor)),
         ],
       ),
     );

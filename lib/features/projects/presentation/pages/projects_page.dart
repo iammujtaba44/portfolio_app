@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio_app/core/extensions/context_extensions.dart';
 import 'package:portfolio_app/core/widgets/widgets.dart';
-import 'package:portfolio_app/features/projects/domain/models/projects_model.dart';
-import 'package:portfolio_app/features/projects/domain/project_enum.dart';
 import 'package:portfolio_app/features/projects/presentation/providers/projects_provider.dart';
 import 'package:portfolio_app/features/projects/presentation/widgets/project_card.dart';
 import 'package:provider/provider.dart';
@@ -35,7 +33,8 @@ class _ProjectsPageState extends State<ProjectsPage> {
             vertical: 24,
           ),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment:
+                context.isDesktop ? CrossAxisAlignment.start : CrossAxisAlignment.center,
             children: [
               const PageHeaderTextWidget(
                 title: 'Projects',
