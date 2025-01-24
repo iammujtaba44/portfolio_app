@@ -84,7 +84,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
                       ),
                     ),
                     Spacer(),
-                    ...appBarPages.map((page) => _buildNavButton(context, page.title)),
+                    ...appBarPages.map((page) => _buildNavButton(context, page)),
                     // Spacer(),
                     // GradientButton(
                     //   text: 'GET IN TOUCH',
@@ -102,9 +102,9 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
     );
   }
 
-  Widget _buildNavButton(BuildContext context, String text) {
-    final bool isSelected = selectedPage.title == text;
-    final int pageIndex = _getPageIndex(text);
+  Widget _buildNavButton(BuildContext context, AppBarPage page) {
+    final bool isSelected = selectedPage == page;
+    final int pageIndex = appBarPages.indexOf(page);
 
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 10),
@@ -118,7 +118,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
         onPressed: () => onPageSelected?.call(pageIndex),
         child: Text(
-          text,
+          page.title,
           style: GoogleFonts.urbanist(
             color: isSelected ? context.primaryTextColor : context.secondaryColor,
             fontSize: context.isDesktop ? 18 : 14,
@@ -128,20 +128,5 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
       ),
     );
-  }
-
-  int _getPageIndex(String text) {
-    switch (text) {
-      case 'Home':
-        return 0;
-      case 'Tech Stack':
-        return 1;
-      case 'Projects':
-        return 2;
-      case 'Contact Me':
-        return 3;
-      default:
-        return 0;
-    }
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio_app/core/providers/app_config_provider.dart';
 import 'package:portfolio_app/core/services/locator_service.dart';
+import 'package:portfolio_app/features/experience/presentation/providers/experience_provider.dart';
 import 'package:portfolio_app/features/home/presentation/providers/home_provider.dart';
 import 'package:portfolio_app/features/projects/presentation/providers/projects_provider.dart';
 import 'package:portfolio_app/features/tech_stack/presentation/providers/tech_stack_provider.dart';
@@ -21,6 +22,7 @@ Future<void> main() async {
         ChangeNotifierProvider.value(value: locator.get<TechStackProvider>()),
         ChangeNotifierProvider.value(value: locator.get<ProjectsProvider>()),
         ChangeNotifierProvider.value(value: locator.get<AppConfigProvider>()),
+        ChangeNotifierProvider.value(value: locator.get<ExperienceProvider>()),
       ],
       child: const PortfolioApp(),
     ),

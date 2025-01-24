@@ -6,6 +6,9 @@ import 'package:portfolio_app/core/services/app_config_service/app_config_servic
 import 'package:portfolio_app/core/services/app_config_service/i_app_config_service.dart';
 import 'package:portfolio_app/core/services/database_service/database_service.dart';
 import 'package:portfolio_app/core/services/database_service/i_database_service.dart';
+import 'package:portfolio_app/features/experience/data/services/experience_service.dart';
+import 'package:portfolio_app/features/experience/data/services/i_experience_service.dart';
+import 'package:portfolio_app/features/experience/presentation/providers/experience_provider.dart';
 import 'package:portfolio_app/features/home/data/services/home_service.dart';
 import 'package:portfolio_app/features/home/data/services/i_home_service.dart';
 import 'package:portfolio_app/features/home/presentation/providers/home_provider.dart';
@@ -42,6 +45,7 @@ class LocatorService implements ILocatorService {
     locator.registerLazySingleton<ITechStackService>(() => TechStackService(locator.get()));
     locator.registerLazySingleton<IProjectsService>(() => ProjectsService(locator.get()));
     locator.registerLazySingleton<IAppConfigService>(() => AppConfigService(locator.get()));
+    locator.registerLazySingleton<IExperienceService>(() => ExperienceService(locator.get()));
   }
 
   static void _setupProviders() {
@@ -52,6 +56,9 @@ class LocatorService implements ILocatorService {
         () => ProjectsProvider(projectsService: locator.get()));
     locator.registerLazySingleton<AppConfigProvider>(
       () => AppConfigProvider(appConfigService: locator.get()),
+    );
+    locator.registerLazySingleton<ExperienceProvider>(
+      () => ExperienceProvider(experienceService: locator.get()),
     );
   }
 

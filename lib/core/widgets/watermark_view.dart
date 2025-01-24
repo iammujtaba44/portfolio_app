@@ -16,8 +16,9 @@ class WaterMarkView extends StatelessWidget {
     return Center(
       child: Text(
         watermark,
-        style: context.textTheme.displayLarge?.copyWith(
+        style: GoogleFonts.urbanist(
           fontSize: context.isDesktop ? 200 : 80,
+          fontWeight: FontWeight.w900,
           color: context.primaryColorWithOpacity1,
         ),
       ),

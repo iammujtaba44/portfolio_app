@@ -8,6 +8,7 @@ class AppDivider extends StatelessWidget {
     this.thickness = 2,
     this.indent = 2,
     this.endIndent = 2,
+    this.color,
   });
 
   final double desktopWidth;
@@ -15,13 +16,14 @@ class AppDivider extends StatelessWidget {
   final double thickness;
   final double indent;
   final double endIndent;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: context.isDesktop ? desktopWidth : mobileWidth,
       child: Divider(
-        color: context.primaryColor,
+        color: color ?? context.primaryColor,
         thickness: thickness,
         indent: indent,
         endIndent: endIndent,

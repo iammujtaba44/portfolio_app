@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio_app/core/extensions/context_extensions.dart';
+import 'package:portfolio_app/features/home/presentation/widgets/home_hero_section_image_view.dart';
 import 'package:portfolio_app/features/home/presentation/widgets/home_hero_section_view.dart';
 import 'package:portfolio_app/features/home/presentation/widgets/home_statistics_section_view.dart';
 import 'package:portfolio_app/resources/resources.dart';
@@ -51,7 +52,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
             children: [
               _buildHiAnimation(),
               const HomeHeroSectionView(),
-              const HomeHeroSectionImage(isPositioned: true),
+              const HomeHeroSectionImageView(isPositioned: true),
               Positioned(
                 bottom: 0,
                 child: const HomeStatisticsSectionView(),

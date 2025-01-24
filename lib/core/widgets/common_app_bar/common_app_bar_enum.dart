@@ -2,7 +2,8 @@ enum AppBarPage {
   home,
   techStack,
   projects,
-  contactMe;
+  contactMe,
+  experiences;
 }
 
 extension AppBarPageExtension on AppBarPage {
@@ -11,6 +12,7 @@ extension AppBarPageExtension on AppBarPage {
         AppBarPage.techStack => 'Tech Stack',
         AppBarPage.projects => 'Projects',
         AppBarPage.contactMe => 'Contact Me',
+        AppBarPage.experiences => 'Experience',
       };
 }
 
@@ -18,5 +20,6 @@ final List<AppBarPage> appBarPages = const [
   AppBarPage.home,
   AppBarPage.techStack,
   AppBarPage.projects,
+  AppBarPage.experiences,
   AppBarPage.contactMe,
 ];

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio_app/core/extensions/context_extensions.dart';
-import 'package:portfolio_app/core/widgets/widgets.dart';
 import 'package:portfolio_app/features/tech_stack/domain/models/tech_stack_model.dart';
+import 'package:portfolio_app/features/tech_stack/presentation/widgets/tech_stack_category_item_widget.dart';
 
 class TechStackCategoryWidget extends StatelessWidget {
   final TechStackCategoryModel model;
@@ -26,12 +26,7 @@ class TechStackCategoryWidget extends StatelessWidget {
           spacing: 8,
           runSpacing: 8,
           children: model.stacks
-              .map((techStack) => AppChipWidget(
-                    label: techStack.name,
-                    icon: 'assets/${techStack.iconPath}',
-                    color: context.descriptionColor,
-                    isSquare: true,
-                  ))
+              .map((techStack) => TechStackCategoryItemWidget(techStack: techStack))
               .toList(),
         ),
       ],

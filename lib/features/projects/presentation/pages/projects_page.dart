@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio_app/core/extensions/context_extensions.dart';
+import 'package:portfolio_app/core/models/app_configs.dart';
 import 'package:portfolio_app/core/providers/app_config_provider.dart';
 import 'package:portfolio_app/core/widgets/widgets.dart';
 import 'package:portfolio_app/features/projects/presentation/providers/projects_provider.dart';
 import 'package:portfolio_app/features/projects/presentation/widgets/project_card.dart';
+import 'package:portfolio_app/features/projects/presentation/widgets/project_see_more_view.dart';
 import 'package:portfolio_app/resources/resources.dart';
 import 'package:provider/provider.dart';
 
@@ -31,38 +33,31 @@ class _ProjectsPageState extends State<ProjectsPage> {
     final appConfigs = context.watch<AppConfigProvider>().appConfigs;
     return Container(
       decoration: BoxDecoration(gradient: AppGradient.blackGradient(context)),
-      child: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: context.isDesktop ? 120 : 24,
-            vertical: 24,
-          ),
-          child: Column(
-            crossAxisAlignment:
-                context.isDesktop ? CrossAxisAlignment.start : CrossAxisAlignment.center,
-            children: [
-              PageHeaderTextWidget(
-                title: 'What I have',
-                highlightTitle: 'Done!',
-                description: appConfigs?.projectsDescription ?? '',
+      child: Stack(
+        children: [
+          WaterMarkView(watermark: 'P\nR\nO\nJ\nE\nC\nT\nS'),
+          SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: context.isDesktop ? 120 : 24,
+                vertical: 24,
               ),
-              const _ProjectsView(),
-              Center(
-                child: TextButton(
-                  onPressed: () => Launcher.launch(appConfigs?.repositoriesUrl ?? ''),
-                  child: Text(
-                    'See More',
-                    style: GoogleFonts.poppins(
-                      color: context.primaryColor,
-                      fontWeight: FontWeight.w500,
-                      decoration: TextDecoration.underline,
-                    ),
+              child: Column(
+                crossAxisAlignment:
+                    context.isDesktop ? CrossAxisAlignment.start : CrossAxisAlignment.center,
+                children: [
+                  PageHeaderTextWidget(
+                    title: 'What I have',
+                    highlightTitle: 'Done!',
+                    description: appConfigs?.projectsDescription ?? '',
                   ),
-                ),
+                  const _ProjectsView(),
+                  ProjectsSeeMoreView(appConfigs: appConfigs),
+                ],
               ),
-            ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }

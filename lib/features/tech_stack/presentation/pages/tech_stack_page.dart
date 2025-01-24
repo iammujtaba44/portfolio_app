@@ -35,6 +35,7 @@ class _TechState extends State<TechStackPage> {
             decoration: BoxDecoration(gradient: AppGradient.blackGradient(context)),
             child: Stack(
               children: [
+                WaterMarkView(watermark: 'T\nE\nC\nH'),
                 ListView(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
@@ -52,7 +53,6 @@ class _TechState extends State<TechStackPage> {
                     _buildMainWidget(techStackProvider),
                   ],
                 ),
-                WaterMarkView(watermark: 'TECH\nSTACK'),
               ],
             ));
       },
