@@ -85,15 +85,6 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
                     ),
                     Spacer(),
                     ...appBarPages.map((page) => _buildNavButton(context, page)),
-                    // Spacer(),
-                    // GradientButton(
-                    //   text: 'GET IN TOUCH',
-                    //   onPressed: () => onGetInTouchPressed?.call(),
-                    //   padding: EdgeInsets.symmetric(
-                    //     horizontal: context.isDesktop ? 24 : 16,
-                    //     vertical: context.isDesktop ? 10 : 8,
-                    //   ),
-                    // ),
                   ],
                 ),
               )
@@ -121,7 +112,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
           page.title,
           style: GoogleFonts.urbanist(
             color: isSelected ? context.primaryTextColor : context.secondaryColor,
-            fontSize: context.isDesktop ? 18 : 14,
+            fontSize: context.isDesktop ? 14 : 14,
             letterSpacing: 1,
             fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
           ),

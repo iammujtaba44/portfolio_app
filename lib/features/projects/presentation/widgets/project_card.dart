@@ -101,6 +101,7 @@ class _ProjectCardDetailView extends StatelessWidget {
                     label: link.type.name,
                     icon: link.type.icon,
                     isDense: true,
+                    color: context.primaryTextColor,
                     onTap: () => launchUrl(Uri.parse(link.url)),
                   ),
                 )

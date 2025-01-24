@@ -20,28 +20,38 @@ class SocialButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final backgroundColor =
         isPrimary ? Theme.of(context).colorScheme.primary : Theme.of(context).colorScheme.surface;
-    final foregroundColor =
-        isPrimary ? context.primaryTextColor : Theme.of(context).colorScheme.primary;
+    final foregroundColor = isPrimary ? context.primaryTextColor : context.secondaryColor;
+
+    // Calculate size based on desktop/mobile
+    final double buttonSize = context.isDesktop ? 48 : 36;
+
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
         backgroundColor: backgroundColor,
         foregroundColor: foregroundColor,
-        padding: EdgeInsets.symmetric(
-          horizontal: label != null
-              ? 24
-              : context.isDesktop
-                  ? 16
-                  : 10,
-          vertical: context.isDesktop ? 16 : 10,
-        ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-          side: BorderSide(
-            color: context.primaryColorWithOpacity1,
-            width: 1,
-          ),
-        ),
+        padding: label != null
+            ? EdgeInsets.symmetric(
+                horizontal: 24,
+                vertical: context.isDesktop ? 16 : 10,
+              )
+            : EdgeInsets.zero, // No padding for circular button
+        minimumSize: label != null ? null : Size(buttonSize, buttonSize),
+        fixedSize: label != null ? null : Size(buttonSize, buttonSize),
+        shape: label != null
+            ? RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+                side: BorderSide(
+                  color: context.primaryColorWithOpacity1,
+                  width: 1,
+                ),
+              )
+            : CircleBorder(
+                side: BorderSide(
+                  color: context.primaryColorWithOpacity1,
+                  width: 1,
+                ),
+              ),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,

@@ -5,14 +5,22 @@ import 'package:portfolio_app/core/providers/app_config_provider.dart';
 import 'package:provider/provider.dart';
 
 class HomeStatisticsSectionView extends StatelessWidget {
-  const HomeStatisticsSectionView({super.key});
+  const HomeStatisticsSectionView({
+    super.key,
+    this.valueColor,
+    this.labelColor,
+    this.bottomPadding,
+  });
+  final Color? valueColor;
+  final Color? labelColor;
+  final double? bottomPadding;
 
   @override
   Widget build(BuildContext context) {
     final appConfigs = context.watch<AppConfigProvider>().appConfigs;
     return Padding(
       padding: EdgeInsets.symmetric().copyWith(
-        bottom: context.isDesktop ? 40.0 : 10.0,
+        bottom: context.isDesktop ? bottomPadding ?? 40.0 : 10.0,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -34,7 +42,7 @@ class HomeStatisticsSectionView extends StatelessWidget {
         Text(
           value,
           style: GoogleFonts.urbanist(
-            color: context.primaryTextColor,
+            color: valueColor ?? context.primaryTextColor,
             fontSize: context.isDesktop ? 30 : 22,
             fontWeight: FontWeight.w500,
             letterSpacing: 1,
@@ -46,7 +54,7 @@ class HomeStatisticsSectionView extends StatelessWidget {
           child: Text(
             label,
             style: GoogleFonts.urbanist(
-              color: context.primaryColor,
+              color: labelColor ?? context.primaryColor,
               fontSize: context.isDesktop ? 10 : 8,
               fontWeight: FontWeight.w400,
               letterSpacing: 1,

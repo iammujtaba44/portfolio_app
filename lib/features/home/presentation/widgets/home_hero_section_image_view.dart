@@ -33,55 +33,54 @@ class _HomeHeroSectionImageViewState extends State<HomeHeroSectionImageView> {
     }
   }
 
-  Widget get imageContent => AppGradient.shaderMask(
-        color: AppGradient.tealGradient,
-        child: MouseRegion(
-          onHover: (event) {
-            setState(() {
-              // Convert cursor position to tilt angles
-              tiltX = (event.localPosition.dy - 250) / 25;
-              tiltY = -(event.localPosition.dx - 250) / 25;
-            });
-          },
-          onExit: (event) {
-            setState(() {
-              tiltX = 0;
-              tiltY = 0;
-            });
-          },
-          child: Transform(
-            transform: Matrix4.identity()
-              ..setEntry(3, 2, 0.001)
-              ..rotateX(tiltX * (3.14159 / 180))
-              ..rotateY(tiltY * (3.14159 / 180)),
-            alignment: FractionalOffset.center,
-            child: widget.isPositioned && !context.isDesktop
-                ? Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(24),
-                      color: context.primaryColor.withAlpha(100),
-                    ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(24),
-                      child: Image.asset(
-                        'assets/profile/profile_main.png',
-                        height: 200,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  )
-                : Container(
-                    height: 500,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(24),
-                      color: context.primaryColor.withAlpha(100),
-                      image: DecorationImage(
-                        image: AssetImage('assets/profile/profile_main_1.png'),
-                        fit: BoxFit.cover,
-                      ),
+  Widget get imageContent => MouseRegion(
+        onHover: (event) {
+          setState(() {
+            // Convert cursor position to tilt angles
+            tiltX = (event.localPosition.dy - 250) / 25;
+            tiltY = -(event.localPosition.dx - 250) / 25;
+          });
+        },
+        onExit: (event) {
+          setState(() {
+            tiltX = 0;
+            tiltY = 0;
+          });
+        },
+        child: Transform(
+          transform: Matrix4.identity()
+            ..setEntry(3, 2, 0.001)
+            ..rotateX(tiltX * (3.14159 / 180))
+            ..rotateY(tiltY * (3.14159 / 180)),
+          alignment: FractionalOffset.center,
+          child: widget.isPositioned && !context.isDesktop
+              ? Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(24),
+                    color: context.primaryColor.withAlpha(100),
+                    gradient: AppGradient.tealGradient,
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(24),
+                    child: Image.asset(
+                      'assets/profile/profile_main.png',
+                      height: 200,
+                      fit: BoxFit.cover,
                     ),
                   ),
-          ),
+                )
+              : Container(
+                  height: 500,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(24),
+                    color: context.primaryColor.withAlpha(100),
+                    gradient: AppGradient.tealGradient,
+                    image: DecorationImage(
+                      image: AssetImage('assets/profile/profile_main_1.png'),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
         ),
       );
 }

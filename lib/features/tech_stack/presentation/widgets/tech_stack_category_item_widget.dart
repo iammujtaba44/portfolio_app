@@ -58,8 +58,8 @@ class _TechStackCategoryItemWidgetState extends State<TechStackCategoryItemWidge
               children: [
                 Image.asset(
                   'assets/${widget.techStack.iconPath}',
-                  width: 30,
-                  height: 30,
+                  width: 32,
+                  height: 32,
                   color: context.primaryTextColor,
                   fit: BoxFit.cover,
                 ),
@@ -70,9 +70,10 @@ class _TechStackCategoryItemWidgetState extends State<TechStackCategoryItemWidge
                     widget.techStack.name,
                     textAlign: TextAlign.center,
                     style: GoogleFonts.urbanist(
-                      color: context.secondaryColor,
+                      color: context.primaryTextColor,
                       fontSize: 14,
-                      fontWeight: FontWeight.w600,
+                      letterSpacing: 0.6,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
                 ),

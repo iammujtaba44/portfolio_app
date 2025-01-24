@@ -46,4 +46,17 @@ abstract class AppGradient {
           Colors.teal.shade500,
         ],
       );
+
+  static LinearGradient get mixedGradient => LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        colors: [
+          Colors.black.withAlpha(20),
+          Colors.black.withAlpha(20),
+          Colors.black.withAlpha(20),
+          Colors.teal.shade900,
+          Colors.teal.shade700,
+          Colors.teal.shade500,
+        ],
+      );
 }
