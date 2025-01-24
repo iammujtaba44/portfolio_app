@@ -41,8 +41,8 @@ class _ExperiencesPageState extends State<ExperiencesPage> {
             ),
             children: [
               PageHeaderTextWidget(
-                title: 'What I have',
-                highlightTitle: 'Done So Far!',
+                title: 'What I am',
+                highlightTitle: 'Doing!',
                 description: 'My professional journey and experience in software development.',
               ),
               const SizedBox(height: 20),

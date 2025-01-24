@@ -34,13 +34,15 @@ class PageHeaderTextWidget extends StatelessWidget {
               ),
             ),
             if (highlightTitle != null) ...[
-              Text(
-                ' ${highlightTitle ?? ''}',
-                style: GoogleFonts.poppins(
-                  color: context.primaryTextColor,
-                  fontWeight: FontWeight.w500,
-                  letterSpacing: 2,
-                  fontSize: context.isDesktop ? 60 : 30,
+              Expanded(
+                child: Text(
+                  ' ${highlightTitle ?? ''}',
+                  style: GoogleFonts.poppins(
+                    color: context.primaryTextColor,
+                    fontWeight: FontWeight.w500,
+                    letterSpacing: 2,
+                    fontSize: context.isDesktop ? 60 : 30,
+                  ),
                 ),
               ),
             ],
