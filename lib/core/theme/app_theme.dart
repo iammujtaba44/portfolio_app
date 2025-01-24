@@ -33,6 +33,7 @@ class AppTheme {
     colorScheme: ColorScheme.fromSeed(
       seedColor: Colors.blue,
       brightness: Brightness.dark,
+      primary: Colors.teal,
     ),
     textTheme: GoogleFonts.poppinsTextTheme(ThemeData.dark().textTheme).copyWith(
       displayLarge: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold),

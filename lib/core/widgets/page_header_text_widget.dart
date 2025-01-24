@@ -2,12 +2,14 @@ part of 'widgets.dart';
 
 class PageHeaderTextWidget extends StatelessWidget {
   final String title;
+  final String? highlightTitle;
   final String description;
   final CrossAxisAlignment? crossAxisAlignment;
 
   const PageHeaderTextWidget({
     super.key,
     required this.title,
+    this.highlightTitle,
     required this.description,
     this.crossAxisAlignment,
   });
@@ -18,13 +20,34 @@ class PageHeaderTextWidget extends StatelessWidget {
       crossAxisAlignment: crossAxisAlignment ?? CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text(
-          title,
-          style: GoogleFonts.poppins(
-            color: Theme.of(context).colorScheme.primary,
-            fontWeight: FontWeight.bold,
-            fontSize: 18,
-          ),
+        Row(
+          mainAxisAlignment:
+              crossAxisAlignment != null ? MainAxisAlignment.center : MainAxisAlignment.start,
+          children: [
+            Text(
+              title,
+              style: GoogleFonts.poppins(
+                color: context.primaryColor,
+                fontWeight: FontWeight.w500,
+                letterSpacing: 2,
+                fontSize: context.isDesktop ? 60 : 30,
+              ),
+            ),
+            if (highlightTitle != null) ...[
+              Text(
+                ' ${highlightTitle ?? ''}',
+                style: GoogleFonts.poppins(
+                  color: context.primaryTextColor,
+                  fontWeight: FontWeight.w500,
+                  letterSpacing: 2,
+                  fontSize: context.isDesktop ? 60 : 30,
+                ),
+              ),
+            ],
+          ],
+        ),
+        AppDivider(
+          desktopWidth: crossAxisAlignment != null ? 400 : 200,
         ),
         const SizedBox(height: 16),
         SizedBox(

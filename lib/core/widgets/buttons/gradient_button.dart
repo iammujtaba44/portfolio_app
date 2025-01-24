@@ -15,15 +15,20 @@ class GradientButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppGradient.shaderMask(
+      color: AppGradient.lightTealGradient,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.purple[200],
+          backgroundColor: Colors.teal.shade100,
           padding: padding ?? const EdgeInsets.symmetric(horizontal: 20),
         ),
         onPressed: onPressed,
         child: Text(
           text,
-          style: context.titleLargeWithBlackAndBold,
+          style: GoogleFonts.poppins(
+            color: context.reversePrimaryTextColor,
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+          ),
         ),
       ),
     );

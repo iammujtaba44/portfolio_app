@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio_app/core/extensions/context_extensions.dart';
+import 'package:portfolio_app/core/providers/app_config_provider.dart';
 import 'package:portfolio_app/core/widgets/widgets.dart';
 import 'package:portfolio_app/features/projects/presentation/providers/projects_provider.dart';
 import 'package:portfolio_app/features/projects/presentation/widgets/project_card.dart';
+import 'package:portfolio_app/resources/resources.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/utils/launch_url.dart';
@@ -19,13 +21,16 @@ class _ProjectsPageState extends State<ProjectsPage> {
   @override
   void initState() {
     super.initState();
-    context.read<ProjectsProvider>().fetchProjects();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      context.read<ProjectsProvider>().fetchProjects();
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    final appConfigs = context.watch<AppConfigProvider>().appConfigs;
     return Container(
-      color: context.surfaceColor,
+      decoration: BoxDecoration(gradient: AppGradient.blackGradient(context)),
       child: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(
@@ -36,16 +41,15 @@ class _ProjectsPageState extends State<ProjectsPage> {
             crossAxisAlignment:
                 context.isDesktop ? CrossAxisAlignment.start : CrossAxisAlignment.center,
             children: [
-              const PageHeaderTextWidget(
-                title: 'Projects',
-                description:
-                    'Here are some of the projects I have worked on, I have worked on a lot of projects but these are the ones I am proud of.',
+              PageHeaderTextWidget(
+                title: 'What I have',
+                highlightTitle: 'Done!',
+                description: appConfigs?.projectsDescription ?? '',
               ),
               const _ProjectsView(),
               Center(
                 child: TextButton(
-                  onPressed: () =>
-                      Launcher.launch('https://github.com/iammujtaba44?tab=repositories'),
+                  onPressed: () => Launcher.launch(appConfigs?.repositoriesUrl ?? ''),
                   child: Text(
                     'See More',
                     style: GoogleFonts.poppins(

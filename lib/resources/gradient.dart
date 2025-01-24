@@ -1,10 +1,11 @@
 part of 'resources.dart';
 
 abstract class AppGradient {
-  static ShaderMask shaderMask({required Widget child}) => ShaderMask(
-        shaderCallback: (bounds) => gradient.createShader(bounds),
+  static ShaderMask shaderMask({required Widget child, LinearGradient? color}) => ShaderMask(
+        shaderCallback: (bounds) => color?.createShader(bounds) ?? gradient.createShader(bounds),
         child: child,
       );
+
   static LinearGradient get gradient => LinearGradient(
         colors: [
           Colors.purple[300]!,
@@ -15,10 +16,34 @@ abstract class AppGradient {
 
   static LinearGradient blackGradient(BuildContext context) => LinearGradient(
         colors: [
-          Colors.transparent,
-          Theme.of(context).colorScheme.primary.withOpacity(0.1),
+          Colors.black.withAlpha(20),
+          Colors.black.withAlpha(20),
+          Colors.black.withAlpha(20),
+          Colors.white.withAlpha(10),
         ],
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+      );
+  static LinearGradient get tealGradient => LinearGradient(
+        begin: Alignment.bottomLeft,
+        end: Alignment.topRight,
+        colors: [
+          Colors.teal.shade900,
+          Colors.teal.shade900,
+          Colors.teal.shade700,
+          Colors.teal.shade300,
+          Colors.teal.shade100,
+          Colors.teal.shade100,
+        ],
+      );
+
+  static LinearGradient get lightTealGradient => LinearGradient(
+        begin: Alignment.centerLeft,
+        end: Alignment.centerRight,
+        colors: [
+          Colors.teal.shade100,
+          Colors.teal.shade300,
+          Colors.teal.shade500,
+        ],
       );
 }

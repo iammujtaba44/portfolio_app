@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:portfolio_app/core/extensions/context_extensions.dart';
 import 'package:portfolio_app/features/home/presentation/widgets/home_hero_section_view.dart';
 import 'package:portfolio_app/features/home/presentation/widgets/home_statistics_section_view.dart';
+import 'package:portfolio_app/resources/resources.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -35,23 +36,30 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      primary: false,
-      children: [
-        Stack(
-          children: [
-            _buildHiAnimation(),
-            const HomeHeroSectionView(),
-            const HomeHeroSectionImage(isPositioned: true),
-            Positioned(
-              bottom: 0,
-              child: const HomeStatisticsSectionView(),
-            )
-          ],
-        ),
-      ],
+    return Container(
+      decoration: BoxDecoration(gradient: AppGradient.blackGradient(context)),
+      child: ListView(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        primary: false,
+        padding: EdgeInsets.symmetric(
+          horizontal: context.isDesktop ? 120 : 24,
+          vertical: 0,
+        ).copyWith(top: context.isDesktop ? 100 : 30),
+        children: [
+          Stack(
+            children: [
+              _buildHiAnimation(),
+              const HomeHeroSectionView(),
+              const HomeHeroSectionImage(isPositioned: true),
+              Positioned(
+                bottom: 0,
+                child: const HomeStatisticsSectionView(),
+              )
+            ],
+          ),
+        ],
+      ),
     );
   }
 
@@ -64,7 +72,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
             offset: Offset(0, _tweenAnimation.value),
             child: Center(
               child: Text(
-                'HI, Folks!',
+                'HI, Forks!',
                 style: context.textTheme.displayLarge?.copyWith(
                   fontSize: context.isDesktop ? 200 : 80,
                   color: Theme.of(context).colorScheme.primary.withOpacity(0.1),

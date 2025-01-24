@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio_app/core/extensions/context_extensions.dart';
 import 'package:portfolio_app/core/utils/date_parser.dart';
 import 'package:portfolio_app/core/utils/launch_url.dart';
+import 'package:portfolio_app/resources/resources.dart';
 
 class ContactPageCalendarCardView extends StatelessWidget {
   const ContactPageCalendarCardView({super.key});
@@ -15,6 +16,13 @@ class ContactPageCalendarCardView extends StatelessWidget {
       decoration: BoxDecoration(
         color: context.surfaceColor,
         borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+            color: context.surfaceColor,
+            blurRadius: 10,
+            offset: const Offset(0, 10),
+          ),
+        ],
       ),
       child: Column(
         children: [
@@ -31,7 +39,7 @@ class ContactPageCalendarCardView extends StatelessWidget {
               style: GoogleFonts.poppins(
                 fontSize: 20,
                 fontWeight: FontWeight.w500,
-                color: context.reversePrimaryTextColor,
+                color: context.primaryTextColor,
               ),
             ),
           ),
@@ -48,7 +56,7 @@ class ContactPageCalendarCardView extends StatelessWidget {
             DateParser.weekday,
             style: GoogleFonts.poppins(
               fontSize: 20,
-              color: Colors.white70,
+              color: context.primaryTextColor,
             ),
           ),
           const SizedBox(height: 24),
@@ -56,7 +64,7 @@ class ContactPageCalendarCardView extends StatelessWidget {
             onPressed: () => Launcher.launchCalendar('https://calendly.com/i-mmujtaba96/meet'),
             icon: Icon(
               Icons.videocam_outlined,
-              color: context.reversePrimaryTextColor,
+              color: context.primaryTextColor,
               size: 20,
             ),
             label: Text(
@@ -64,12 +72,12 @@ class ContactPageCalendarCardView extends StatelessWidget {
               style: GoogleFonts.poppins(
                 fontSize: 14,
                 fontWeight: FontWeight.w500,
-                color: context.reversePrimaryTextColor,
+                color: context.primaryTextColor,
               ),
             ),
             style: ElevatedButton.styleFrom(
               backgroundColor: context.primaryColor,
-              foregroundColor: Colors.black,
+              foregroundColor: context.primaryTextColor,
               minimumSize: const Size(double.infinity, 48),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),

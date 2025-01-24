@@ -1,6 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart' show GlobalKey, NavigatorState, ScaffoldMessengerState;
 import 'package:get_it/get_it.dart';
+import 'package:portfolio_app/core/providers/app_config_provider.dart';
+import 'package:portfolio_app/core/services/app_config_service/app_config_service.dart';
+import 'package:portfolio_app/core/services/app_config_service/i_app_config_service.dart';
 import 'package:portfolio_app/core/services/database_service/database_service.dart';
 import 'package:portfolio_app/core/services/database_service/i_database_service.dart';
 import 'package:portfolio_app/features/home/data/services/home_service.dart';
@@ -30,6 +33,7 @@ class LocatorService implements ILocatorService {
     _setupProviders();
 
     locator.get<HomeProvider>().fetchSocialAccounts();
+    locator.get<AppConfigProvider>().getAppConfigs();
   }
 
   Future<void> _setupServices() async {
@@ -37,6 +41,7 @@ class LocatorService implements ILocatorService {
     locator.registerLazySingleton<IHomeService>(() => HomeService(locator.get()));
     locator.registerLazySingleton<ITechStackService>(() => TechStackService(locator.get()));
     locator.registerLazySingleton<IProjectsService>(() => ProjectsService(locator.get()));
+    locator.registerLazySingleton<IAppConfigService>(() => AppConfigService(locator.get()));
   }
 
   static void _setupProviders() {
@@ -45,6 +50,9 @@ class LocatorService implements ILocatorService {
         () => TechStackProvider(techStackService: locator.get()));
     locator.registerLazySingleton<ProjectsProvider>(
         () => ProjectsProvider(projectsService: locator.get()));
+    locator.registerLazySingleton<AppConfigProvider>(
+      () => AppConfigProvider(appConfigService: locator.get()),
+    );
   }
 
   static void _registerRouters() {}

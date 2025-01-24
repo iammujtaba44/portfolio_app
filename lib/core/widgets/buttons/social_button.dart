@@ -21,7 +21,7 @@ class SocialButton extends StatelessWidget {
     final backgroundColor =
         isPrimary ? Theme.of(context).colorScheme.primary : Theme.of(context).colorScheme.surface;
     final foregroundColor =
-        isPrimary ? Theme.of(context).colorScheme.onPrimary : Theme.of(context).colorScheme.primary;
+        isPrimary ? context.primaryTextColor : Theme.of(context).colorScheme.primary;
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
@@ -38,7 +38,7 @@ class SocialButton extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
           side: BorderSide(
-            color: Theme.of(context).colorScheme.primary,
+            color: context.primaryColorWithOpacity1,
             width: 1,
           ),
         ),

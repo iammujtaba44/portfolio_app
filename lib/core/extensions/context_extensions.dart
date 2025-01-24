@@ -43,4 +43,5 @@ extension TextThemeExtension on BuildContext {
   Color get primaryColorWithOpacity1 => Theme.of(this).colorScheme.primary.withOpacity(0.1);
   Color get descriptionColor => isDarkMode ? Colors.grey[400]! : Colors.grey[600]!;
   Color get surfaceColor => Theme.of(this).colorScheme.surface;
+  Color get backgroundColor => isDarkMode ? Colors.black.withAlpha(30) : Colors.white.withAlpha(30);
 }

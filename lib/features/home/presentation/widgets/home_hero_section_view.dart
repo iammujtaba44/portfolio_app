@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio_app/core/extensions/context_extensions.dart';
+import 'package:portfolio_app/core/providers/app_config_provider.dart';
 import 'package:portfolio_app/core/widgets/widgets.dart';
 import 'package:portfolio_app/resources/resources.dart';
+import 'package:provider/provider.dart';
 
 class HomeHeroSectionView extends StatelessWidget {
   const HomeHeroSectionView({super.key});
@@ -10,17 +12,16 @@ class HomeHeroSectionView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: context.isDesktop ? 48.0 : 24.0,
-        vertical: context.isDesktop ? 64.0 : 50.0,
+      padding: EdgeInsets.only(
+        bottom: context.isDesktop ? 120.0 : 50.0,
       ),
-      decoration: BoxDecoration(gradient: AppGradient.blackGradient(context)),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(flex: 3, child: _HomeHeroSectionDescriptionView()),
-          const SizedBox(width: 48),
+          const SizedBox(width: 10),
           const HomeHeroSectionImage(),
+          const SizedBox(width: 40),
         ],
       ),
     );
@@ -32,14 +33,16 @@ class _HomeHeroSectionDescriptionView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appConfigs = context.watch<AppConfigProvider>().appConfigs;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
           padding: EdgeInsets.only(left: 5),
           child: AppGradient.shaderMask(
+            color: AppGradient.tealGradient,
             child: Text(
-              'Senior Mobile Engineer',
+              appConfigs?.title?.toUpperCase() ?? '',
               style: GoogleFonts.urbanist(
                 fontSize: context.isDesktop ? 20 : 10,
                 fontWeight: FontWeight.w500,
@@ -54,17 +57,17 @@ class _HomeHeroSectionDescriptionView extends StatelessWidget {
               TextSpan(
                 text: 'Muhammad ',
                 style: GoogleFonts.urbanist(
-                  fontSize: context.isDesktop ? 60 : 30,
+                  fontSize: context.isDesktop ? 100 : 30,
                   fontWeight: FontWeight.w400,
                   letterSpacing: 5,
-                  color: context.primaryTextColor.withValues(alpha: 0.7),
+                  color: context.primaryTextColor,
                 ),
               ),
               TextSpan(
                 text: '\nMujtaba',
                 style: GoogleFonts.urbanist(
-                  fontSize: context.isDesktop ? 60 : 30,
-                  color: context.primaryTextColor,
+                  fontSize: context.isDesktop ? 100 : 30,
+                  color: context.primaryColor,
                   fontWeight: FontWeight.w700,
                 ),
               ),
@@ -72,11 +75,20 @@ class _HomeHeroSectionDescriptionView extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 24),
-        Text(
-          'I break down complex user experience problems to create integrity focused solutions that connect billions of people',
-          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                fontSize: context.isDesktop ? 25 : 10,
-              ),
+        const AppDivider(),
+        const SizedBox(height: 10),
+        SizedBox(
+          width: context.isDesktop ? 600 : 200,
+          child: Text(
+            appConfigs?.about ?? '',
+            maxLines: 4,
+            style: GoogleFonts.urbanist(
+              fontSize: context.isDesktop ? 15 : 10,
+              fontWeight: FontWeight.w500,
+              letterSpacing: 1,
+              color: context.primaryTextColor,
+            ),
+          ),
         ),
         const SizedBox(height: 32),
         _HomeHeroSectionSocialButtonView(),
@@ -98,6 +110,11 @@ class _HomeHeroSectionSocialButtonView extends StatelessWidget {
         SocialButton(
           onPressed: () {
             // locator.get<IProjectsService>().fetchProjects();
+
+            // locator.get<IDatabaseService>().updateData('appConfigs', {
+            //   'email': 'mujtaba.dev@gmail.com',
+            //   'phone': '+6281234567890',
+            // });
             // locator.get<IDatabaseService>().updateData('projects', {
             //   'projects': [
             //     {
@@ -256,14 +273,6 @@ class _HomeHeroSectionSocialButtonView extends StatelessWidget {
           icon: Icons.download,
           isPrimary: true,
         ),
-        GradientButton(
-          text: 'GET IN TOUCH',
-          onPressed: () {},
-          padding: EdgeInsets.symmetric(
-            horizontal: context.isDesktop ? 32 : 24,
-            vertical: context.isDesktop ? 16 : 12,
-          ),
-        ),
       ],
     );
   }
@@ -277,14 +286,18 @@ class HomeHeroSectionImage extends StatelessWidget {
   Widget build(BuildContext context) {
     if (context.isDesktop && !isPositioned) {
       return Expanded(
-        flex: 2,
-        child: Container(
-          height: 500,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(24),
-            image: const DecorationImage(
-              image: AssetImage('assets/profile/profile_main.png'),
-              fit: BoxFit.fitHeight,
+        flex: 1,
+        child: AppGradient.shaderMask(
+          color: AppGradient.tealGradient,
+          child: Container(
+            height: 500,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(24),
+              color: context.primaryColor.withAlpha(100),
+              image: DecorationImage(
+                image: AssetImage('assets/profile/profile_main_1.png'),
+                fit: BoxFit.cover,
+              ),
             ),
           ),
         ),
@@ -292,9 +305,33 @@ class HomeHeroSectionImage extends StatelessWidget {
     } else {
       if (isPositioned && !context.isDesktop) {
         return Positioned(
-          bottom: 0,
-          right: 0,
-          child: Image.asset('assets/profile/profile_main.png', height: 200),
+          top: 0,
+          right: 10,
+          child: AppGradient.shaderMask(
+            color: AppGradient.tealGradient,
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(24),
+                color: context.primaryColor.withAlpha(100),
+                boxShadow: [
+                  BoxShadow(
+                    color: context.primaryColor.withOpacity(0.1),
+                    blurRadius: 10,
+                    spreadRadius: 0,
+                    offset: const Offset(20, 10),
+                  ),
+                ],
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(24),
+                child: Image.asset(
+                  'assets/profile/profile_main.png',
+                  height: 200,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+          ),
         );
       }
       return const SizedBox.shrink();
