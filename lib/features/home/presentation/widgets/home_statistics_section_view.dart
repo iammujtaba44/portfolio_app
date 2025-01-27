@@ -26,10 +26,10 @@ class HomeStatisticsSectionView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         spacing: context.isDesktop ? 40 : 20,
         children: [
-          _buildStatistic(context, '~${appConfigs?.totalExperience}', 'Years of\nExperience'),
+          _buildStatistic(context, appConfigs?.totalExperience ?? '', 'Years of\nExperience'),
           _buildStatistic(
-              context, '${appConfigs?.totalProjects}+', 'Projects Completed\nin 10+ Countries'),
-          _buildStatistic(context, '${appConfigs?.totalClients}+', 'Happy\nClients'),
+              context, appConfigs?.totalProjects ?? '', 'Projects Completed\nin 10+ Countries'),
+          _buildStatistic(context, appConfigs?.totalClients ?? '', 'Happy\nClients'),
         ],
       ),
     );

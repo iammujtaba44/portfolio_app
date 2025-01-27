@@ -16,6 +16,7 @@ class WaterMarkView extends StatelessWidget {
     return Center(
       child: Text(
         watermark,
+        textAlign: TextAlign.center,
         style: GoogleFonts.urbanist(
           fontSize: context.isDesktop ? 200 : 80,
           fontWeight: FontWeight.w900,

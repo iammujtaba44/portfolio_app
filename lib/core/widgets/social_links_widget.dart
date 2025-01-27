@@ -1,7 +1,8 @@
 part of 'widgets.dart';
 
 class SocialLinksWidget extends StatelessWidget {
-  const SocialLinksWidget({super.key});
+  const SocialLinksWidget({super.key, this.isPrimary = true});
+  final bool isPrimary;
 
   @override
   Widget build(BuildContext context) {
@@ -14,6 +15,7 @@ class SocialLinksWidget extends StatelessWidget {
           (e) => SocialButton(
             onPressed: () => Launcher.launch(e.url),
             image: e.image,
+            isPrimary: isPrimary,
           ),
         ),
       ],

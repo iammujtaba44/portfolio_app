@@ -60,12 +60,13 @@ class _HomeHeroSectionImageViewState extends State<HomeHeroSectionImageView> {
                     color: context.primaryColor.withAlpha(100),
                     gradient: AppGradient.tealGradient,
                   ),
+                  width: 120,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(24),
                     child: Image.asset(
-                      'assets/profile/profile_main.png',
-                      height: 200,
-                      fit: BoxFit.cover,
+                      'assets/profile/profile_main_2.png',
+                      height: 250,
+                      fit: BoxFit.fitHeight,
                     ),
                   ),
                 )
@@ -76,7 +77,7 @@ class _HomeHeroSectionImageViewState extends State<HomeHeroSectionImageView> {
                     color: context.primaryColor.withAlpha(100),
                     gradient: AppGradient.tealGradient,
                     image: DecorationImage(
-                      image: AssetImage('assets/profile/profile_main_1.png'),
+                      image: AssetImage('assets/profile/profile_main_2.png'),
                       fit: BoxFit.cover,
                     ),
                   ),
