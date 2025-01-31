@@ -56,3 +56,10 @@ y/
 # FVM Version Cache
 .fvm/
 
+# Web related
+web/index.html
+web/favicon.ico
+
+assets/*
+
+android/app/google-services.json
